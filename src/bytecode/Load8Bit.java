@@ -14,6 +14,8 @@ public class Load8Bit extends ByteCode {
 		} //TODO: Create a d8CopyBehavior subclass of CopyBehavior
 	} //TODO: Figure out how to get arguments and store them into copyBehavior
 
+	//Test Comment
+
 	@Override
 	public void execute(CPU cpu) {
 
