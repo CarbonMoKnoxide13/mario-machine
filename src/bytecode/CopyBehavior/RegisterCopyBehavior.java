@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class RegisterCopyBehavior extends CopyBehavior{
 
-	//TODO: What is meant by (HL) in the CPU Manual?
+	//TODO: Record any operations that have to do with (HL) so you can implement them after the address space is implemented
+	//Byte Codes needed to implement that use (HL): 7Eh, 46h, 4Eh, 56h, ...
+	//(HL) means "access the byte at the location pointed to by the HL register"
 	String registerName;
 	int registerValue;
 
