@@ -1,5 +1,15 @@
 package cpu;
 
+import bytecode.ByteCode;
+import bytecode.ByteCodeFactory;
+import bytecode.Load8Bit;
+import bytecode.LookupTable;
+import memory.Cartridge.Cartridge;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class CPU {
 	/*
 	Reads Cartridge instructions one by one - should Cartridge have the read method?
@@ -23,8 +33,35 @@ public class CPU {
 	private int registerL;
 	private int pc;
 
-	public CPU() {
+	/*public CPU() {
 		this.pc = 256; //100h
+	}*/
+
+	public CPU() {
+		File f = new File("sample_files/Tetris (JUE) (V1.1) [!].gb");
+		try{
+			int[] romArray = Cartridge.loadFile(f);
+			int romIterator = 0;
+			while(romIterator < romArray.length) {
+				ByteCode bc = ByteCodeFactory.getByteCode(romArray[romIterator]);
+				if(bc != null) {
+					System.out.println(LookupTable.getCommand(romArray[romIterator]) + " !!!!!!!!!!!!!!!");
+					ArrayList<Integer> argList = new ArrayList<>();
+					for (int i = 0; i < bc.getArgLength(); i++) {
+						argList.add(++romIterator);
+						System.out.println(Integer.toHexString(romArray[romIterator]));
+					}
+					bc.passByteCodeArguments(argList, this);
+					romIterator++;
+				} else {
+					System.out.println(LookupTable.getCommand(romArray[romIterator]));
+					romIterator++;
+				}
+			}
+
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int readByte(int address) {
@@ -32,8 +69,83 @@ public class CPU {
 		return 0;
 	}
 
+	public void setRegister(String registerName, int value) {
+		switch (registerName) {
+			case "A":
+				setRegisterA(value);
+				break;
+			case "B":
+				setRegisterB(value);
+				break;
+			case "C":
+				setRegisterC(value);
+				break;
+			case "D":
+				setRegisterD(value);
+				break;
+			case "E":
+				setRegisterE(value);
+				break;
+			case "H":
+				setRegisterH(value);
+				break;
+			case "L":
+				setRegisterL(value);
+				break;
+		}
+	}
+
+	public int getRegister(String registerName) {
+		switch (registerName) {
+			case "A":
+				return getRegisterA();
+			case "B":
+				return getRegisterB();
+			case "C":
+				return getRegisterC();
+			case "D":
+				return getRegisterD();
+			case "E":
+				return getRegisterE();
+			case "H":
+				return getRegisterH();
+			case "L":
+				return getRegisterL();
+			default:
+				return 0;
+		}
+	}
+
 	public void writeByte(int address, int value) {
 		System.out.println("Writing byte");
+	}
+
+	public void setRegisterA(int value) {
+		registerA = value;
+	}
+
+	public void setRegisterB(int value) {
+		registerB = value;
+	}
+
+	public void setRegisterC(int value) {
+		registerC = value;
+	}
+
+	public void setRegisterD(int value) {
+		registerD = value;
+	}
+
+	public void setRegisterE(int value) {
+		registerE = value;
+	}
+
+	public void setRegisterH(int value) {
+		registerH = value;
+	}
+
+	public void setRegisterL(int value) {
+		registerL = value;
 	}
 
 	public int getPc() {

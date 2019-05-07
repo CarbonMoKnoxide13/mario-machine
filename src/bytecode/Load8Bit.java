@@ -1,23 +1,32 @@
 package bytecode;
 
 import bytecode.CopyBehavior.CopyBehavior;
+import bytecode.WriteBehavior.WriteBehavior;
 import cpu.CPU;
+
+import java.util.ArrayList;
 
 public class Load8Bit extends ByteCode {
 
 	CopyBehavior copyBehavior;
+	WriteBehavior writeBehavior;
 
-	public Load8Bit(String leftArgument, String rightArgument) {
-		if(ArgType.is8BitRegister(leftArgument) && ArgType.isD8(rightArgument)) {
-			this.argLength = 1; //TODO: Implement ArgType table to get above info
-			//copyBehavior = d8CopyBehavior(); //With whatever args are necessary
-		} //TODO: Create a d8CopyBehavior subclass of CopyBehavior
-	} //TODO: Figure out how to get arguments and store them into copyBehavior
+	public Load8Bit(int argLength, WriteBehavior writeBehavior, CopyBehavior copyBehavior) {
+		this.argLength = argLength; //TODO: Implement ArgType table to get above info
+		this.copyBehavior = copyBehavior; //Should I pass in the arguments to copyBehavior before I give it to Load8Bit?
+		this.writeBehavior = writeBehavior;
+	}
+
+	@Override
+	public void passByteCodeArguments(ArrayList<Integer> args, CPU cpu) {
+		copyBehavior.init(args, cpu); //Initialize copyBehavior with parameters
+	} //TODO: Seriously think about how I can remove the need to have access to the cpu
 
 	//Test Comment
 
 	@Override
 	public void execute(CPU cpu) {
-
+		writeBehavior.initValue(copyBehavior.execute());
+		writeBehavior.execute(cpu);
 	}
 }

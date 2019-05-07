@@ -276,6 +276,7 @@ public class LookupTable {
 	}
 
 	public static String getCommand(int key) {
+		LookupTable lt = new LookupTable();
 		return (String)byteCodeLookup.get(key);
 	}
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import bytecode.LookupTable;
+import cpu.CPU;
 import org.apache.commons.io.IOUtils;
 
 public class Cartridge {
@@ -15,7 +16,7 @@ public class Cartridge {
 	Holds ROM file (.gb file format)
 	 */
 
-	private static int[] loadFile(File file) throws IOException {
+	public static int[] loadFile(File file) throws IOException {
 		InputStream is = new FileInputStream(file);
 		return load(is, (int)file.length());
 	}
@@ -30,21 +31,7 @@ public class Cartridge {
 	}
 
 	public static void main(String args[]) {
-		File f = new File("sample_files/Tetris (JUE) (V1.1) [!].gb");
-		try{
-			int[] printArray = Cartridge.loadFile(f);
-			LookupTable lt = new LookupTable();
-			for(int i = 0; i < printArray.length; i++) {
-				/*if(printArray[i] <= 255) {
-					System.out.println(LookupTable.getCommand(printArray[i]));
-				} else {
-					System.out.println(Integer.toHexString(printArray[i]));
-				}*/
-				System.out.println(Integer.toHexString(printArray[i]));
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+		CPU cpu = new CPU();
 	}
 
 	/*
