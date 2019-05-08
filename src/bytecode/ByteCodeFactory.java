@@ -7,16 +7,28 @@ public class ByteCodeFactory {
 
 	public static ByteCode getByteCode(int opCode) {
 
-		switch(opCode) {
+		switch(opCode) { //TODO: Only 8 bit loads left are codes 0x3A, 0x32, 0x2A, and 0x22. These require DEC and INC.
+
+			case 2:
+				return new Load8Bit(0, new PointerWriteBehavior("BC"), new RegisterCopyBehavior("A"));
 
 			case 6:
 				return new Load8Bit(1, new RegisterWriteBehavior("B"), new d8CopyBehavior()); //TODO: Improve syntax so this is easier to read
 
+			case 10:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new PointerCopyBehavior("BC"));
+
 			case 14:
 				return new Load8Bit(1, new RegisterWriteBehavior("C"), new d8CopyBehavior());
 
+			case 18:
+				return new Load8Bit(0, new PointerWriteBehavior("DE"), new RegisterCopyBehavior("A"));
+
 			case 22:
 				return new Load8Bit(1, new RegisterWriteBehavior("D"), new d8CopyBehavior());
+
+			case 26:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new PointerCopyBehavior("DE"));
 
 			case 30:
 				return new Load8Bit(1, new RegisterWriteBehavior("E"), new d8CopyBehavior());
@@ -26,6 +38,12 @@ public class ByteCodeFactory {
 
 			case 46:
 				return new Load8Bit(1, new RegisterWriteBehavior("L"), new d8CopyBehavior());
+
+			case 54:
+				return new Load8Bit(1, new PointerWriteBehavior("HL"), new d8CopyBehavior());
+
+			case 62:
+				return new Load8Bit(1, new RegisterWriteBehavior("A"), new d8CopyBehavior());
 
 			case 64:
 				return new Load8Bit(0, new RegisterWriteBehavior("B"), new RegisterCopyBehavior("B"));
@@ -45,6 +63,12 @@ public class ByteCodeFactory {
 			case 69:
 				return new Load8Bit(0, new RegisterWriteBehavior("B"), new RegisterCopyBehavior("L"));
 
+			case 70:
+				return new Load8Bit(0, new RegisterWriteBehavior("B"), new PointerCopyBehavior("HL"));
+
+			case 71:
+				return new Load8Bit(0, new RegisterWriteBehavior("B"), new RegisterCopyBehavior("A"));
+
 			case 72:
 				return new Load8Bit(0, new RegisterWriteBehavior("C"), new RegisterCopyBehavior("B"));
 
@@ -62,6 +86,12 @@ public class ByteCodeFactory {
 
 			case 77:
 				return new Load8Bit(0, new RegisterWriteBehavior("C"), new RegisterCopyBehavior("L"));
+
+			case 78:
+				return new Load8Bit(0, new RegisterWriteBehavior("C"), new PointerCopyBehavior("HL"));
+
+			case 79:
+				return new Load8Bit(0, new RegisterWriteBehavior("C"), new RegisterCopyBehavior("A"));
 
 			case 80:
 				return new Load8Bit(0, new RegisterWriteBehavior("D"), new RegisterCopyBehavior("B"));
@@ -81,6 +111,12 @@ public class ByteCodeFactory {
 			case 85:
 				return new Load8Bit(0, new RegisterWriteBehavior("D"), new RegisterCopyBehavior("L"));
 
+			case 86:
+				return new Load8Bit(0, new RegisterWriteBehavior("D"), new PointerCopyBehavior("HL"));
+
+			case 87:
+				return new Load8Bit(0, new RegisterWriteBehavior("D"), new RegisterCopyBehavior("A"));
+
 			case 88:
 				return new Load8Bit(0, new RegisterWriteBehavior("E"), new RegisterCopyBehavior("B"));
 
@@ -98,6 +134,12 @@ public class ByteCodeFactory {
 
 			case 93:
 				return new Load8Bit(0, new RegisterWriteBehavior("E"), new RegisterCopyBehavior("L"));
+
+			case 94:
+				return new Load8Bit(0, new RegisterWriteBehavior("E"), new PointerCopyBehavior("HL"));
+
+			case 95:
+				return new Load8Bit(0, new RegisterWriteBehavior("E"), new RegisterCopyBehavior("A"));
 
 			case 96:
 				return new Load8Bit(0, new RegisterWriteBehavior("H"), new RegisterCopyBehavior("B"));
@@ -117,6 +159,12 @@ public class ByteCodeFactory {
 			case 101:
 				return new Load8Bit(0, new RegisterWriteBehavior("H"), new RegisterCopyBehavior("L"));
 
+			case 102:
+				return new Load8Bit(0, new RegisterWriteBehavior("H"), new PointerCopyBehavior("HL"));
+
+			case 103:
+				return new Load8Bit(0, new RegisterWriteBehavior("H"), new RegisterCopyBehavior("A"));
+
 			case 104:
 				return new Load8Bit(0, new RegisterWriteBehavior("L"), new RegisterCopyBehavior("B"));
 
@@ -134,6 +182,75 @@ public class ByteCodeFactory {
 
 			case 109:
 				return new Load8Bit(0, new RegisterWriteBehavior("L"), new RegisterCopyBehavior("L"));
+
+			case 110:
+				return new Load8Bit(0, new RegisterWriteBehavior("L"), new PointerCopyBehavior("HL"));
+
+			case 111:
+				return new Load8Bit(0, new RegisterWriteBehavior("L"), new RegisterCopyBehavior("A"));
+
+			case 112:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("B"));
+
+			case 113:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("C"));
+
+			case 114:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("D"));
+
+			case 115:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("E"));
+
+			case 116:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("H"));
+
+			case 117:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("L"));
+
+			case 119:
+				return new Load8Bit(0, new PointerWriteBehavior("HL"), new RegisterCopyBehavior("A"));
+
+			case 120:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("B"));
+
+			case 121:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("C"));
+
+			case 122:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("D"));
+
+			case 123:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("E"));
+
+			case 124:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("H"));
+
+			case 125:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("L"));
+
+			case 126:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new PointerCopyBehavior("HL"));
+
+			case 127:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("A"));
+
+			case 224:
+				return new Load8Bit(1, new d8PointerWriteBehavior(), new RegisterCopyBehavior("A"));
+
+			case 226:
+				return new Load8Bit(0, new CPointerWriteBehavior(), new RegisterCopyBehavior("A"));
+
+			case 234:
+				return new Load8Bit(2, new a16PointerWriteBehavior(), new RegisterCopyBehavior("A"));
+
+			case 240:
+				return new Load8Bit(1, new RegisterWriteBehavior("A"), new d8PointerCopyBehavior());
+
+			case 242:
+				return new Load8Bit(0, new RegisterWriteBehavior("A"), new CPointerCopyBehavior());
+
+			case 250:
+				return new Load8Bit(2, new RegisterWriteBehavior("A"), new a16CopyBehavior());
 
 			default:
 				return null;

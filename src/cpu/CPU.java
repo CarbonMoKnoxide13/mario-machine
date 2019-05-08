@@ -5,6 +5,7 @@ import bytecode.ByteCodeFactory;
 import bytecode.Load8Bit;
 import bytecode.LookupTable;
 import memory.Cartridge.Cartridge;
+import memory.MMU;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class CPU {
 	private int registerC;
 	private int registerD;
 	private int registerE;
+	private int registerF; //Flags. Should this be abstracted?
 	private int registerH;
 	private int registerL;
 	private int pc;
@@ -39,6 +41,7 @@ public class CPU {
 
 	public CPU() {
 		File f = new File("sample_files/Tetris (JUE) (V1.1) [!].gb");
+		MMU mmu = new MMU(); //TODO: Figure out how to get rid of this
 		try{
 			int[] romArray = Cartridge.loadFile(f);
 			int romIterator = 0;
@@ -51,7 +54,7 @@ public class CPU {
 						argList.add(++romIterator);
 						System.out.println(Integer.toHexString(romArray[romIterator]));
 					}
-					bc.passByteCodeArguments(argList, this);
+					bc.passByteCodeArguments(argList, this, mmu);
 					romIterator++;
 				} else {
 					System.out.println(LookupTable.getCommand(romArray[romIterator]));
@@ -107,10 +110,20 @@ public class CPU {
 				return getRegisterD();
 			case "E":
 				return getRegisterE();
+			case "F":
+				return getRegisterF();
 			case "H":
 				return getRegisterH();
 			case "L":
 				return getRegisterL();
+			case "AF":
+				return getRegisterAF();
+			case "BC":
+				return getRegisterBC();
+			case "DE":
+				return getRegisterDE();
+			case "HL":
+				return getRegisterHL();
 			default:
 				return 0;
 		}
@@ -172,12 +185,32 @@ public class CPU {
 		return registerE;
 	}
 
+	public int getRegisterF() {
+		return registerF;
+	}
+
 	public int getRegisterH() {
 		return registerH;
 	}
 
 	public int getRegisterL() {
 		return registerL;
+	}
+
+	public int getRegisterAF() {
+		return (registerA << 8 | registerF);
+	}
+
+	public int getRegisterBC() {
+		return (registerB << 8 | registerC);
+	}
+
+	public int getRegisterDE() {
+		return (registerD << 8 | registerE);
+	}
+
+	public int getRegisterHL() {
+		return (registerH << 8 | registerL);
 	}
 }
 

@@ -7,7 +7,7 @@ public abstract class MemorySpace {
 
 	public abstract boolean isAddressInMemorySpace(int address);
 
-	public void setByte(int address, int value) {
+	public void setByte(int address, int value) { //TODO: Abstract this so that ROM cannot be written to
 		data[address - memoryBase] = value;
 	}
 

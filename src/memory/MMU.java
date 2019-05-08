@@ -21,4 +21,21 @@ public class MMU {
 		memoryBus.add(new SpriteSpace());
 		memoryBus.add(new ZeroPageRAM());
 	}
+	
+	public int getByte(int address) {
+		for (MemorySpace segment: memoryBus) {
+			if(segment.isAddressInMemorySpace(address)) {
+				return segment.getByte(address);
+			}
+		}
+		return 0; //This should never happen
+	}
+
+	public void setByte(int address, int value) {
+		for(MemorySpace segment: memoryBus) {
+			if(segment.isAddressInMemorySpace(address)) {
+				segment.setByte(address, value);
+			}
+		}
+	}
 }

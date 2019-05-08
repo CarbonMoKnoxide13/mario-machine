@@ -1,6 +1,7 @@
 package bytecode;
 
 import cpu.CPU;
+import memory.MMU;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,6 @@ public abstract class ByteCode {
 		return argLength;
 	}
 
-	public abstract void execute(CPU cpu);
-	public abstract void passByteCodeArguments(ArrayList<Integer> args, CPU cpu);
+	public abstract void execute(CPU cpu, MMU mmu);
+	public abstract void passByteCodeArguments(ArrayList<Integer> args, CPU cpu, MMU mmu);
 }
