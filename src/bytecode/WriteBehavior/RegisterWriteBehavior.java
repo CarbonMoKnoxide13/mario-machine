@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class RegisterWriteBehavior extends WriteBehavior{
 
-	private String destination;
+	private String registerName;
 
 	public RegisterWriteBehavior(String registerName) {
-		this.destination = registerName;
+		this.registerName = registerName;
 	}
 
 	@Override
@@ -22,6 +22,6 @@ public class RegisterWriteBehavior extends WriteBehavior{
 	public void execute(CPU cpu, MMU mmu) {
 		//Write to a specific register.
 		//I'll probably use some sort of setRegister(String registerName, int value) method.
-		cpu.setRegister(destination, value); //Write to corresponding register
+		cpu.setRegister(registerName, value); //Write to corresponding register
 	}
 }

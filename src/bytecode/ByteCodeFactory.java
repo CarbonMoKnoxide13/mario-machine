@@ -1,13 +1,25 @@
 package bytecode;
 
 import bytecode.CopyBehavior.*;
+import bytecode.Operation.Add8BitOperation;
 import bytecode.WriteBehavior.*;
 
 public class ByteCodeFactory {
 
 	public static ByteCode getByteCode(int opCode) {
 
-		switch(opCode) { //TODO: Only 8 bit loads left are codes 0x3A, 0x32, 0x2A, and 0x22. These require DEC and INC.
+		//TODO: Cannot do 16 bit load 0xF8 until ADD and STORE are implemented.
+		//TODO: Only 8 bit loads left are codes 0x3A, 0x32, 0x2A, and 0x22. These require DEC and INC.
+		//TODO: Must implement extra cycle and PUSH in order to do 16 bit loads 0xC5, 0xD5, 0xE5, 0xF5 (PUSH)
+		//TODO: Must implement POP and STORE in order to do 16 bit loads 0xC1, 0xD1, 0xE1, 0xF1 (POP)
+		//I HAVE Load, I just renamed it Write and I HAVE store, I just renamed it Copy
+		//How to do ALU???
+		//ALU byte code with an Operator variable
+
+		switch(opCode) {
+
+			case 1:
+				return new Load8Bit(2, new RegisterWriteBehavior("BC"), new a16CopyBehavior());
 
 			case 2:
 				return new Load8Bit(0, new PointerWriteBehavior("BC"), new RegisterCopyBehavior("A"));
@@ -15,11 +27,17 @@ public class ByteCodeFactory {
 			case 6:
 				return new Load8Bit(1, new RegisterWriteBehavior("B"), new d8CopyBehavior()); //TODO: Improve syntax so this is easier to read
 
+			case 8:
+				return new Load8Bit(2, new a16PointerWriteBehavior(), new RegisterCopyBehavior("SP"));
+
 			case 10:
 				return new Load8Bit(0, new RegisterWriteBehavior("A"), new PointerCopyBehavior("BC"));
 
 			case 14:
 				return new Load8Bit(1, new RegisterWriteBehavior("C"), new d8CopyBehavior());
+
+			case 17:
+				return new Load8Bit(2, new RegisterWriteBehavior("DE"), new a16CopyBehavior());
 
 			case 18:
 				return new Load8Bit(0, new PointerWriteBehavior("DE"), new RegisterCopyBehavior("A"));
@@ -33,11 +51,17 @@ public class ByteCodeFactory {
 			case 30:
 				return new Load8Bit(1, new RegisterWriteBehavior("E"), new d8CopyBehavior());
 
+			case 33:
+				return new Load8Bit(2, new RegisterWriteBehavior("HL"), new a16CopyBehavior());
+
 			case 38:
 				return new Load8Bit(1, new RegisterWriteBehavior("H"), new d8CopyBehavior());
 
 			case 46:
 				return new Load8Bit(1, new RegisterWriteBehavior("L"), new d8CopyBehavior());
+
+			case 49:
+				return new Load8Bit(2, new RegisterWriteBehavior("SP"), new a16CopyBehavior());
 
 			case 54:
 				return new Load8Bit(1, new PointerWriteBehavior("HL"), new d8CopyBehavior());
@@ -234,6 +258,27 @@ public class ByteCodeFactory {
 			case 127:
 				return new Load8Bit(0, new RegisterWriteBehavior("A"), new RegisterCopyBehavior("A"));
 
+			case 128:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 129:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 130:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 131:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 132:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 133:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 135:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
 			case 224:
 				return new Load8Bit(1, new d8PointerWriteBehavior(), new RegisterCopyBehavior("A"));
 
@@ -248,6 +293,9 @@ public class ByteCodeFactory {
 
 			case 242:
 				return new Load8Bit(0, new RegisterWriteBehavior("A"), new CPointerCopyBehavior());
+
+			case 249:
+				return new Load8Bit(0, new RegisterWriteBehavior("SP"), new RegisterCopyBehavior("HL"));
 
 			case 250:
 				return new Load8Bit(2, new RegisterWriteBehavior("A"), new a16CopyBehavior());

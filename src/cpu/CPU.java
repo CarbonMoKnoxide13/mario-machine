@@ -30,9 +30,10 @@ public class CPU {
 	private int registerC;
 	private int registerD;
 	private int registerE;
-	private int registerF; //Flags. Should this be abstracted?
+	private FlagRegister registerF; //Flags. Should this be abstracted?
 	private int registerH;
 	private int registerL;
+	private int sp;
 	private int pc;
 
 	/*public CPU() {
@@ -95,6 +96,12 @@ public class CPU {
 			case "L":
 				setRegisterL(value);
 				break;
+			case "SP":
+				setSp(value);
+				break;
+			case "PC":
+				setPc(value);
+				break;
 		}
 	}
 
@@ -111,7 +118,7 @@ public class CPU {
 			case "E":
 				return getRegisterE();
 			case "F":
-				return getRegisterF();
+				return getRegisterF().getRegisterF();
 			case "H":
 				return getRegisterH();
 			case "L":
@@ -124,6 +131,10 @@ public class CPU {
 				return getRegisterDE();
 			case "HL":
 				return getRegisterHL();
+			case "SP":
+				return getSp();
+			case "PC":
+				return getPc();
 			default:
 				return 0;
 		}
@@ -131,6 +142,14 @@ public class CPU {
 
 	public void writeByte(int address, int value) {
 		System.out.println("Writing byte");
+	}
+
+	public void setSp(int value) {
+		sp = value;
+	}
+
+	public void setPc(int value) {
+		pc = value;
 	}
 
 	public void setRegisterA(int value) {
@@ -161,6 +180,30 @@ public class CPU {
 		registerL = value;
 	}
 
+	public void setRegisterAF(int value) {
+		registerA = Helpers.getMSB(value); //TODO: Do I have to check that value is a word?
+		registerF.setRegisterF(Helpers.getLSB(value));
+	}
+
+	public void setRegisterBC(int value) {
+		registerB = Helpers.getMSB(value);
+		registerC = Helpers.getLSB(value);
+	}
+
+	public void setRegisterDE(int value) {
+		registerD = Helpers.getMSB(value);
+		registerE = Helpers.getLSB(value);
+	}
+
+	public void setRegisterHL(int value) {
+		registerH = Helpers.getMSB(value);
+		registerL = Helpers.getLSB(value);
+	}
+
+	public int getSp() {
+		return sp;
+	}
+
 	public int getPc() {
 		return pc;
 	}
@@ -185,7 +228,7 @@ public class CPU {
 		return registerE;
 	}
 
-	public int getRegisterF() {
+	public FlagRegister getRegisterF() {
 		return registerF;
 	}
 
@@ -198,7 +241,7 @@ public class CPU {
 	}
 
 	public int getRegisterAF() {
-		return (registerA << 8 | registerF);
+		return (registerA << 8 | registerF.getRegisterF());
 	}
 
 	public int getRegisterBC() {
