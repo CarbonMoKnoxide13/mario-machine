@@ -26,6 +26,8 @@ public class ALUOperation extends ByteCode {
 
 	@Override
 	public void passByteCodeArguments(ArrayList<Integer> args, CPU cpu, MMU mmu) {
+		aluCommand.init(args, cpu, mmu); //Is this the right order?
+		destination.initArgs(args);
 		//Figure out how to pass ByteCode arguments to Operators
 	}
 }

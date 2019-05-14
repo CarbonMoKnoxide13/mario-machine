@@ -1,7 +1,7 @@
 package bytecode;
 
 import bytecode.CopyBehavior.*;
-import bytecode.Operation.Add8BitOperation;
+import bytecode.Operation.*;
 import bytecode.WriteBehavior.*;
 
 public class ByteCodeFactory {
@@ -276,14 +276,152 @@ public class ByteCodeFactory {
 			case 133:
 				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
 
+			case 134:
+				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
 			case 135:
 				return new ALUOperation(0, new Add8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 136:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 137:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 138:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 139:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 140:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 141:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 142:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
+			case 143:
+				return new ALUOperation(0, new Adc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 144:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 145:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 146:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 147:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 148:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 149:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 150:
+				return new ALUOperation(0, new Sub8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
+			case 151:
+				return new ALUOperation(1, new Sub8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 152:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 153:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 154:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 155:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 156:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 157:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 158:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
+			case 159:
+				return new ALUOperation(0, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 160:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 161:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 162:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 163:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 164:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 165:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 166:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
+			case 167:
+				return new ALUOperation(0, new And8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 176:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("B")), new RegisterWriteBehavior("A"));
+
+			case 177:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("C")), new RegisterWriteBehavior("A"));
+
+			case 178:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("D")), new RegisterWriteBehavior("A"));
+
+			case 179:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("E")), new RegisterWriteBehavior("A"));
+
+			case 180:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("H")), new RegisterWriteBehavior("A"));
+
+			case 181:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("L")), new RegisterWriteBehavior("A"));
+
+			case 182:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new PointerCopyBehavior("HL")), new RegisterWriteBehavior("A"));
+
+			case 183:
+				return new ALUOperation(0, new Or8BitOperation(new RegisterCopyBehavior("A"), new RegisterCopyBehavior("A")), new RegisterWriteBehavior("A"));
+
+			case 198:
+				return new ALUOperation(1, new Add8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
+
+			case 206:
+				return new ALUOperation(1, new Adc8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
+
+			case 214:
+				return new ALUOperation(1, new Sub8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
+
+			case 222:
+				return new ALUOperation(1, new Sbc8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
 
 			case 224:
 				return new Load8Bit(1, new d8PointerWriteBehavior(), new RegisterCopyBehavior("A"));
 
 			case 226:
 				return new Load8Bit(0, new CPointerWriteBehavior(), new RegisterCopyBehavior("A"));
+
+			case 230:
+				return new ALUOperation(1, new And8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
 
 			case 234:
 				return new Load8Bit(2, new a16PointerWriteBehavior(), new RegisterCopyBehavior("A"));
@@ -293,6 +431,9 @@ public class ByteCodeFactory {
 
 			case 242:
 				return new Load8Bit(0, new RegisterWriteBehavior("A"), new CPointerCopyBehavior());
+
+			case 246:
+				return new ALUOperation(1, new Or8BitOperation(new RegisterCopyBehavior("A"), new d8PointerCopyBehavior()), new RegisterWriteBehavior("A"));
 
 			case 249:
 				return new Load8Bit(0, new RegisterWriteBehavior("SP"), new RegisterCopyBehavior("HL"));
